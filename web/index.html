@@ -1,156 +1,269 @@
-<!--
-DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-Copyright (c) 2013, 2016 Oracle and/or its affiliates. All rights reserved.
-
-Oracle and Java are registered trademarks of Oracle and/or its affiliates.
-Other names may be trademarks of their respective owners.
-
-The contents of this file are subject to the terms of either the GNU
-General Public License Version 2 only ("GPL") or the Common
-Development and Distribution License("CDDL") (collectively, the
-"License"). You may not use this file except in compliance with the
-License. You can obtain a copy of the License at
-http://www.netbeans.org/cddl-gplv2.html
-or nbbuild/licenses/CDDL-GPL-2-CP. See the License for the
-specific language governing permissions and limitations under the
-License.  When distributing the software, include this License Header
-Notice in each file and include the License file at
-nbbuild/licenses/CDDL-GPL-2-CP.  Oracle designates this
-particular file as subject to the "Classpath" exception as provided
-by Oracle in the GPL Version 2 section of the License file that
-accompanied this code. If applicable, add the following below the
-License Header, with the fields enclosed by brackets [] replaced by
-your own identifying information:
-"Portions Copyrighted [year] [name of copyright owner]"
-
-If you wish your version of this file to be governed by only the CDDL
-or only the GPL Version 2, indicate your decision by adding
-"[Contributor] elects to include this software in this distribution
-under the [CDDL or GPL Version 2] license." If you do not indicate a
-single choice of license, a recipient has the option to distribute
-your version of this file under either the CDDL, the GPL Version 2 or
-to extend the choice of license to its licensees as provided above.
-However, if you add GPL Version 2 code and therefore, elected the GPL
-Version 2 license, then the option applies only if the new code is
-made subject to such option by the copyright holder.
-
-Contributor(s):
--->
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>PJRestExpediente CODE</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.2/css/theme.blue.min.css'>
         <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.2/css/jquery.tablesorter.pager.min.css'>
         <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'></script>
         <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js'></script>
         <script src='//ajax.cdnjs.com/ajax/libs/backbone.js/1.0.0/backbone.js'></script>
-        <script src='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.2/js/jquery.tablesorter.min.js' type="text/javascript"></script>
-        <script src='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.2/js/extras/jquery.tablesorter.pager.min.js' type="text/javascript"></script>
-        <script src='CustomerClient.js'></script>
+        <link href="public/json-viewer.css" rel="stylesheet" type="text/css"/>
+        <script src="public/json-viewer.js" type="text/javascript"></script>
+
+        <style>
+            /* Font */
+            @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+            /* Design */
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+
+
+
+            body {
+                background-color: #999999;
+                font-family: 'Quicksand', serif;
+                font-style: normal;
+                font-weight: 400;
+                letter-spacing: 0;
+                /*background: rgb(142,142,142);
+                background: radial-gradient(circle, rgba(142,142,142,1) 0%, rgba(182,88,88,1) 14%, rgba(113,0,0,1) 100%);*/
+            }
+
+            .main{
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            h1 {
+                font-size: 24px;
+                font-weight: 400;
+                text-align: center;
+            }
+
+            img {
+                height: auto;
+                max-width: 100%;
+                vertical-align: middle;
+            }
+
+            .btn {
+                color: #ffffff;
+                padding: 0.8rem;
+                font-size: 14px;
+                text-transform: uppercase;
+                border-radius: 4px;
+                font-weight: 400;
+                display: block;
+                width: 100%;
+                cursor: pointer;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                background: transparent;
+            }
+
+            .btn:hover {
+                background-color: rgba(255, 255, 255, 0.12);
+            }
+
+            .cards {
+               
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .cards_item {
+               
+                padding: 1rem;
+                width: 100% !important;
+            }
+            /*
+                        @media (min-width: 40rem) {
+                            .cards_item {
+                                width: 75%;
+                            }
+                        }
+            
+                        @media (min-width: 56rem) {
+                            .cards_item {
+                                width: 50%;
+                            }
+                        }
+            */
+
+            .card {
+                background-color: white;
+                border-radius: 0.25rem;
+                box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .card_content {
+                padding: 1rem;
+                background: linear-gradient(to bottom left, #9b3d3d 40%, #740000 100%);
+            }
+
+            .card_title {
+                color: #ffffff;
+                font-size: 1.1rem;
+                font-weight: 700;
+                letter-spacing: 1px;
+                text-transform: capitalize;
+                margin: 0px;
+            }
+
+            .card_text {
+                color: #ffffff;
+                font-size: 0.875rem;
+                line-height: 1.5;
+                margin-bottom: 1.25rem;    
+                font-weight: 400;
+            }
+            .made_by{
+                font-weight: 400;
+                font-size: 13px;
+                margin-top: 35px;
+                text-align: center;
+            }
+
+
+        </style>
+
     </head>
-    <body>
-        <div id='create'></div>
+    <body 
 
-        <table id='datatable' class='tablesorter-blue'>
-        </table>
-        <div class='pager' id='pager'>
-            <img src='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.2/css/images/first.png' class='first' alt='First'/>
-            <img src='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.2/css/images/prev.png' class='prev' alt='Prev'/>
-            <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
-            <img src='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.2/css/images/next.png' class='next' alt='Next'/>
-            <img src='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.2/css/images/last.png' class='last' alt='Last'/>
-            <select class='pagesize'>
-                <option selected='selected' value='10'>10</option>
-                <option value='20'>20</option>
-                <option value='30'>30</option>
-                <option value='40'>40</option>
-            </select>
-        </div>
-        <br>
+        >
 
-        <div id='details'></div>
+        <div style="
+             padding: 0;
+             margin: 0;
 
 
-        <!-- Templates -->
-        <script type='text/template' id='tpl-create'>
-            <!--
-            Put your controls to create new entity here.
+             ">
 
-            Class 'new' is used to listen on events in JS code.
-            -->
-            <button class='new'>Create</button>
-        </script>
+            <div class="main">
+                <h1>PJRest Prueba</h1>
+                <ul class="cards">
+                    <li class="cards_item">
+                        <div class="card">
 
-        <script type='text/template' id='thead'>
-            <thead>
-            <tr>
-            <th>customerId</th>
-            <th>addressline2</th>
-            <th>phone</th>
-            <th>addressline1</th>
-            <th>fax</th>
-            <th>email</th>
-            <th>name</th>
-            <th>state</th>
-            <th>creditLimit</th>
-            <th>city</th>
-            </tr>
-            </thead>
-        </script>
-        <script type='text/template' id='tpl-customer-list-item'>
-            <td><a href='#<%= customerId %>'><%= customerId %></a></td>
-            <td><%= addressline2 %></td>
-            <td><%= phone %></td>
-            <td><%= addressline1 %></td>
-            <td><%= fax %></td>
-            <td><%= email %></td>
-            <td><%= name %></td>
-            <td><%= state %></td>
-            <td><%= creditLimit %></td>
-            <td><%= city %></td>
-        </script>
+                            <div class="card_content">
+                                <h2 class="card_title">Servicio 01</h2>
+                                <p class="card_text">http://localhost:8080/PJRestTest/webresources/expediente/<B>{CODIGO}</B></p>
+                                <p class="card_text">Obtener expidiente por Codigo Barras</p>
+                                <label for="codigo">Codigo Barras</label>
+                                <input id="codigo" value="1002020012302221" 
+                                       class=""/>
+                                <br>  
+                                <br>  
+                                <button class="btn card_btn" onclick="showValueInput()">probar servicio</button>
 
-        <script type='text/template' id='tpl-customer-details'>
-            <div>
-            <table>
-            <tbody>
-            <tr><td>Id</td>
-            <td>
-            <input type='text' id='customerId' name='id' value='<%= typeof(customerId)!== "undefined" ? customerId : "" %>'  />
-            </td>
-            </tr>
-            <tr>
-            <td>addressline2</td><td><input type='text' id='addressline2' name='addressline2' value='<%= addressline2 %>'/></td></tr>
-            <tr>
-            <td>phone</td><td><input type='text' id='phone' name='phone' value='<%= phone %>'/></td></tr>
-            <tr>
-            <td>addressline1</td><td><input type='text' id='addressline1' name='addressline1' value='<%= addressline1 %>'/></td></tr>
-            <tr>
-            <td>fax</td><td><input type='text' id='fax' name='fax' value='<%= fax %>'/></td></tr>
-            <tr>
-            <td>email</td><td><input type='text' id='email' name='email' value='<%= email %>'/></td></tr>
-            <tr>
-            <td>name</td><td><input type='text' id='name' name='name' value='<%= name %>'/></td></tr>
-            <tr>
-            <td>state</td><td><input type='text' id='state' name='state' value='<%= state %>'/></td></tr>
-            <tr>
-            <td>creditLimit</td><td><input type='text' id='creditLimit' name='creditLimit' value='<%= creditLimit %>'/></td></tr>
-            <tr>
-            <td>city</td><td><input type='text' id='city' name='city' value='<%= city %>'/></td></tr>
-            </tbody>
-            </table>
-            <!--
-            Put your controls to create new entity here.
-            Classes 'save' and 'delete' are used to listen on events in JS code.
-            -->
-            <button  class='save'>Save</button>
-            <button  class='delete'>Delete</button>
+                                <textarea
+                                    style="                                    
+                                    padding: 8px;
+                                    width: 100%;
+                                    max-width: 100%;
+                                    "
+                                    id="result" >
+
+                                </textarea>
+
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <script>
+                        
+                        
+                        
+                        function showValueInput(){
+                             document.getElementById("result").innerHTML="";
+                            var inputValue = document.getElementById("codigo").value;
+                            //window.open('http://localhost:8080/PJRestTest/webresources/expediente/'+inputValue, '_blank');
+                             
+                            var xmlHttp = new XMLHttpRequest();
+                            xmlHttp.open( "GET", 'http://localhost:8080/PJRestTest/webresources/expediente/'+inputValue, false ); // false for synchronous request
+                            xmlHttp.send( null );
+                            //return xmlHttp.responseText;
+                            var jsonViewer = new JSONViewer();
+                            var responseGet=xmlHttp.responseText;
+                            //jsonViewer.showJSON(responseGet,-1,-1);
+                            //document.getElementById("result").innerHTML= responseGet;
+                            //document.querySelector("#result").appendChild(jsonViewer.showJSON(responseGet,-1,-1));
+                            document.getElementById("result").innerHTML= responseGet; 
+                            
+                            
+                        }
+                      
+                        
+                    </script>
+
+                    <!-- comment 
+                    <li class="cards_item">
+                        <div class="card">
+                            <div class="card_image"><img src="https://picsum.photos/500/300/?image=5"></div>
+                            <div class="card_content">
+                                <h2 class="card_title">Card Grid Layout</h2>
+                                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                                <button class="btn card_btn">Read More</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="cards_item">
+                        <div class="card">
+                            <div class="card_image"><img src="https://picsum.photos/500/300/?image=11"></div>
+                            <div class="card_content">
+                                <h2 class="card_title">Card Grid Layout</h2>
+                                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                                <button class="btn card_btn">Read More</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="cards_item">
+                        <div class="card">
+                            <div class="card_image"><img src="https://picsum.photos/500/300/?image=14"></div>
+                            <div class="card_content">
+                                <h2 class="card_title">Card Grid Layout</h2>
+                                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                                <button class="btn card_btn">Read More</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="cards_item">
+                        <div class="card">
+                            <div class="card_image"><img src="https://picsum.photos/500/300/?image=17"></div>
+                            <div class="card_content">
+                                <h2 class="card_title">Card Grid Layout</h2>
+                                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                                <button class="btn card_btn">Read More</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="cards_item">
+                        <div class="card">
+                            <div class="card_image"><img src="https://picsum.photos/500/300/?image=2"></div>
+                            <div class="card_content">
+                                <h2 class="card_title">Card Grid Layout</h2>
+                                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                                <button class="btn card_btn">Read More</button>
+                            </div>
+                        </div>
+                    </li>
+                    -->
+                </ul>
             </div>
-        </script>
 
+            <h3 class="made_by"></h3>
+
+        </div>
 
     </body>
 </html>
