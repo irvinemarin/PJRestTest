@@ -6,6 +6,7 @@
 package pe.gob.pj.Dao;
 
 import com.google.gson.Gson;
+import pe.gob.pj.DaoImpl.ExpedienteDao;
 import pe.gob.pj.entities.Expediente;
 import pe.gob.pj.entities.utils.UtilDB;
 
@@ -13,17 +14,18 @@ import pe.gob.pj.entities.utils.UtilDB;
  *
  * @author Irvin
  */
-public class ExpedienteDao {
+public class ExpedienteDaoImpl implements ExpedienteDao {
 
-    private static ExpedienteDao ISNTANCE;
+    private static ExpedienteDaoImpl ISNTANCE;
 
-    public static ExpedienteDao getInstance() {
+    public static ExpedienteDaoImpl getInstance() {
         if (ISNTANCE == null) {
-            ISNTANCE = new ExpedienteDao();
+            ISNTANCE = new ExpedienteDaoImpl();
         }
         return ISNTANCE;
     }
 
+    @Override
     public String getExpedienteByCode(String code) {
         Expediente exp = null;
         for (Expediente find : UtilDB.getListExpediente()) {
@@ -32,7 +34,6 @@ public class ExpedienteDao {
                 exp = find;
             }
         }
-
         if (exp != null) {
             return new Gson().toJson(exp);
         } else {

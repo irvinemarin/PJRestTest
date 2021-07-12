@@ -1,6 +1,5 @@
 package pe.gob.pj.services;
 
-import com.google.gson.Gson;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,7 +9,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pe.gob.pj.Dao.ExpedienteDao;
+import pe.gob.pj.Dao.ExpedienteDaoImpl;
+import pe.gob.pj.DaoImpl.ExpedienteDao;
+import pe.gob.pj.entities.Servicio;
 
 /**
  *
@@ -22,25 +23,29 @@ public class RestExpediente {
 
     @PersistenceContext(unitName = "CustomerDBPU")
     private EntityManager em;
+    ExpedienteDao daoExpediente;
 
     public RestExpediente() {
-
+        daoExpediente = ExpedienteDaoImpl.getInstance();
     }
 
     @GET
     @Path("{code}")
     @Produces("application/json")
-    public Response getDataFormCode(@PathParam("code") String code) {
+    public Response getDataExample01(@PathParam("code") String code) {
         System.out.println("getDataFormCode");
-        String result = ExpedienteDao.getInstance().getExpedienteByCode(code);
+        String result = daoExpediente.getExpedienteByCode(code);
         return Response.ok(result, MediaType.APPLICATION_JSON).build();
     }
 
-    protected EntityManager getEntityManager() {
-        return em;
+    @GET
+    @Path("all")
+    @Produces("application/json")
+    public Response getServicesList() {
+        String result = Servicio.getListServices();
+        return Response.ok(result, MediaType.APPLICATION_JSON).build();
     }
 
-    //
 //    @POST 
 //    @Consumes({"application/xml", "application/json"})
 //    public void create(Customer entity) {
@@ -77,8 +82,8 @@ public class RestExpediente {
         return String.valueOf("count value");
     }
 
-//    @Override
-//    protected EntityManager getEntityManager() {
-//        return em;
-//    }
+    //@Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
 }

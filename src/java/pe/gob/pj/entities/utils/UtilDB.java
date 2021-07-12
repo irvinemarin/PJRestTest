@@ -29,17 +29,6 @@ public class UtilDB {
     }
 
     public static List<Parte> getListParte() {
-        //DEMANDANTE	DEMANDADO
-        //NATURAL	JURIDICA ESTATAL
-        //DNI	
-        //92828222	
-        //CHAVEZ	
-        //LUDEÑA	
-        //PEDRO ANTONIO	
-        //	EMPRESA PATROL
-        //24/9/1981	
-        //NO            SI
-
         List<Parte> list = new ArrayList<>();
         list.add(new Parte("DEMANDANTE", "NATURAL", "DNI", "92828222", "CHAVEZ", "LUDEÑA", "PEDRO ANTONIO", "", "24/9/1981", "NO"));
         list.add(new Parte("DEMANDADO", "JURIDICA ESTATAL", "", "", "", "", " ", "EMPRESA PATROL", "24/9/1981", "SI"));
