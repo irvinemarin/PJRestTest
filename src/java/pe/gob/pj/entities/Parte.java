@@ -11,20 +11,24 @@ package pe.gob.pj.entities;
  */
 public class Parte {
 
-    String c_tipo_parte;                                //Tipo Parte
-    String c_tipo_persona;                                //Tipo Persona
-    String c_tipo_doc;                                //Tipo de Documento
-    String x_doc_id;                                //Documento de Identidad
-    String x_ape_paterno;                                //Apellido paterno
-    String x_ape_materno;                                //Apellido Materno
-    String x_nombres;                                //Nombres 
-    String x_razon_social;                                //Razon social
-    String f_nacimiento;                                //fecha de Nacimiento
-    String c_recurrente;                                //Parte si es Recurrente
+    int n_secuencial;
+    String c_barra,
+            c_tipo_parte,
+            c_tipo_persona,
+            c_tipo_doc,
+            x_doc_id,
+            x_ape_paterno,
+            x_ape_materno,
+            x_nombres,
+            x_razon_social,
+            f_nacimiento,
+            c_recurrente;
 
     public Parte() {
     }
 
+    
+    
     public Parte(String c_tipo_parte, String c_tipo_persona, String c_tipo_doc, String x_doc_id, String x_ape_paterno, String x_ape_materno, String x_nombres, String x_razon_social, String f_nacimiento, String c_recurrente) {
         this.c_tipo_parte = c_tipo_parte;
         this.c_tipo_persona = c_tipo_persona;
@@ -36,6 +40,14 @@ public class Parte {
         this.x_razon_social = x_razon_social;
         this.f_nacimiento = f_nacimiento;
         this.c_recurrente = c_recurrente;
+    }
+
+    public String getC_barra() {
+        return c_barra;
+    }
+
+    public void setC_barra(String c_barra) {
+        this.c_barra = c_barra;
     }
 
     public String getC_tipo_parte() {
@@ -118,8 +130,4 @@ public class Parte {
         this.c_recurrente = c_recurrente;
     }
 
-   
-
-    
-    
 }

@@ -6,12 +6,8 @@
 package pe.gob.pj.entities.utils;
 
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.Driver;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,13 +17,16 @@ import java.util.logging.Logger;
  */
 public class ConexionAnyWhere {
 
-    private static final String DRIVER = "com.sybase.jdbc4.jdbc.SybDataSource";
-    private static Connection instance = null;
+    //private static final String URL = "jdbc:sybase:Tds:127.0.0.1:2530/SIJ11_001_09_01";
+    private final String DRIVER = "com.sybase.jdbc4.jdbc.SybDataSource";
+    private Connection instance = null;
 
-//    public static void main(String[] args) {
-//        getConexion("dba", "sql");
-//    }
-    public static Connection getConexion(String Username, String password, String puerto, String host, String DBName) {
+    //    public static void main(String[] args) {
+    //        //cerrarConexion();
+    //        getConexion("dba", "sql", "2530", "127.0.0.1", "SIJ11_001_09_01");
+    //    }
+    
+    public Connection getConexion(String Username, String password, String puerto, String host, String DBName) {
         String URL = "jdbc:sybase:Tds:" + host + ":" + puerto + "/" + DBName;
         try {
             Class.forName(DRIVER);

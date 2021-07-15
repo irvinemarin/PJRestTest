@@ -49,6 +49,7 @@ public class Expediente {
     int n_fojas_juz;                                //Fojas de  juzgado origen
     List<Parte> partes;
     BaseDatos dbInfo;
+    //fgf
 
     public BaseDatos getDbInfo() {
         return dbInfo;
@@ -56,6 +57,9 @@ public class Expediente {
 
     public void setDbInfo(BaseDatos dbInfo) {
         this.dbInfo = dbInfo;
+    }
+
+    public Expediente() {
     }
 
    

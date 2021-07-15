@@ -6,16 +6,22 @@
 package pe.gob.pj.DaoImpl;
 
 import com.google.gson.Gson;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.jdbc.OracleTypes;
 import pe.gob.pj.Dao.ExpedienteDao;
 import pe.gob.pj.entities.BaseDatos;
 import pe.gob.pj.entities.Expediente;
+import pe.gob.pj.entities.Parte;
 import pe.gob.pj.entities.utils.ConexionMySQL;
-import pe.gob.pj.entities.utils.UtilDB;
+import pe.gob.pj.entities.utils.ConexionOracle;
 
 /**
  *
@@ -42,13 +48,11 @@ public class ExpedienteDaoImpl implements ExpedienteDao {
     @Override
     public String getExpedienteByCode(String code) {
         Expediente exp = null;
-        for (Expediente find : UtilDB.getListExpediente()) {
-            String codeItem = find.getC_codigoBarras();
-            if (codeItem.equals(code)) {
-                exp = find;
-            }
-        }
+
+        exp = getExpedienteDB(code);
+
         if (exp != null) {
+            exp.setPartes(getPartesDB(code));
             System.out.println("Distrito nombre : " + exp.getC_distrito_juz());
             exp.setDbInfo(getDBData(exp.getC_distrito_juz()));
 
@@ -96,6 +100,117 @@ public class ExpedienteDaoImpl implements ExpedienteDao {
         }
         return dbInformaction;
 
+    }
+
+    /**
+     * Execute the stored procedure
+     *
+     * @param price price parameter for stored procedure
+     */
+    private Expediente getExpedienteDB(String pUnico) {
+        CallableStatement stmt;
+        Expediente exp = null;
+        try {
+            String query = "{ ? = call  sp_getexpediente(?) }";
+            cx = ConexionOracle.getConnection();
+            stmt = cx.prepareCall(query);
+            // register the type of the out param - an Oracle specific type
+            stmt.registerOutParameter(1, OracleTypes.CURSOR);
+            // set the in param
+            stmt.setString(2, pUnico);
+            // execute and retrieve the result set
+            stmt.execute();
+            rs = (ResultSet) stmt.getObject(1);
+            // print the results
+            while (rs.next()) {
+
+                //Fojas de  juzgado origen
+                //    List<Parte> partes;
+                //    BaseDatos dbInfo;
+                exp = new Expediente();
+                exp.setC_codigoBarras(rs.getString("c_barra"));
+                exp.setC_recurso(rs.getString("c_recurso"));
+                exp.setC_proceso(rs.getString("c_proceso"));
+                exp.setC_especialidad(rs.getString("c_especialidad"));
+                exp.setC_procedencia(rs.getString("c_procedencia"));
+                exp.setF_oficio(rs.getString("f_oficio"));
+                exp.setC_num_oficio(rs.getString("c_num_oficio"));
+                exp.setC_sumilla(rs.getString("c_sumilla"));
+                exp.setC_materia(rs.getString("c_materia"));
+                exp.setF_demanda(rs.getString("f_demanda"));
+                exp.setF_calificacion(rs.getString("f_calificacion"));
+                exp.setN_nro_exp_orig(rs.getInt("n_nro_exp_orig"));
+                exp.setN_ano_exp_orig(rs.getInt("n_ano_exp_orig"));
+                exp.setN_incidente_orig(rs.getInt("n_incidente_orig"));
+                exp.setC_distrito_orig(rs.getString("c_distrito_orig"));
+                exp.setC_provincia_orig(rs.getString("c_provincia_orig"));
+                exp.setC_instancia_orig(rs.getString("c_instancia_orig"));
+                exp.setC_tipo_resol_orig(rs.getString("c_tipo_resol_orig"));
+                exp.setC_fallo_sala(rs.getString("c_fallo_sala"));
+                exp.setF_resolucion_orig(rs.getString("f_resolucion_orig"));
+                exp.setN_fojas_orig(rs.getInt("n_fojas_orig"));
+                exp.setN_nro_exp_juz(rs.getInt("n_nro_exp_juz"));
+                exp.setN_incidente_juz(rs.getInt("n_incidente_juz"));
+                exp.setC_distrito_juz(rs.getString("c_distrito_juz"));
+                exp.setC_provincia_juz(rs.getString("c_provincia_juz"));
+                exp.setC_org_jurisd_juz(rs.getString("c_org_jurisd_juz"));
+                exp.setC_instancia_juz(rs.getString("c_instancia_juz"));
+                exp.setC_tipo_resol_juz(rs.getString("c_tipo_resol_juz"));
+                exp.setC_fallo_juz(rs.getString("c_fallo_juz"));
+                exp.setF_resolucion_juz(rs.getString("f_resolucion_juz"));
+                exp.setN_fojas_juz(rs.getInt("n_fojas_juz"));
+
+            }
+
+            rs.close();
+            stmt.close();
+            //ConexionOracle.cerrarConexion();
+        } catch (SQLException ex) {
+            Logger.getLogger(ExpedienteDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return exp;
+    }
+
+    private List<Parte> getPartesDB(String pUnico) {
+        CallableStatement stmt;
+        List<Parte> list = null;
+        try {
+            String query = "{ ? = call  sp_getPartes(?) }";
+            cx = ConexionOracle.getConnection();
+            stmt = cx.prepareCall(query);
+            // register the type of the out param - an Oracle specific type
+            stmt.registerOutParameter(1, OracleTypes.CURSOR);
+            // set the in param
+            stmt.setString(2, pUnico);
+            // execute and retrieve the result set
+            stmt.execute();
+            rs = (ResultSet) stmt.getObject(1);
+            // print the results
+            list = new ArrayList<>();
+
+            while (rs.next()) {
+                Parte exp = new Parte();
+                exp.setC_barra(rs.getString("c_barra"));
+                exp.setC_tipo_parte(rs.getString("c_tipo_parte"));
+                exp.setC_tipo_persona(rs.getString("c_tipo_persona"));
+                exp.setC_tipo_doc(rs.getString("c_tipo_doc"));
+                exp.setX_doc_id(rs.getString("x_doc_id"));
+                exp.setX_ape_paterno(rs.getString("x_ape_paterno"));
+                exp.setX_ape_materno(rs.getString("x_ape_materno"));
+                exp.setX_nombres(rs.getString("x_nombres"));
+                exp.setX_razon_social(rs.getString("x_razon_social"));
+                exp.setF_nacimiento(rs.getString("f_nacimiento"));
+                exp.setC_recurrente(rs.getString("c_recurrente"));
+                list.add(exp);
+            }
+
+            rs.close();
+            stmt.close();
+            //ConexionOracle.cerrarConexion();
+        } catch (SQLException ex) {
+            Logger.getLogger(ExpedienteDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
 }

@@ -25,7 +25,7 @@ function showServiceList() {
                     '              <p class="card_text" id="linkService">' + urlBase + responseObject[i].urlService + '<B>{CODIGO}</B></p> ' +
                     '              <p class="card_text">Obtener expidiente por Codigo Barras</p> ' +
                     '              <label for="InputValue_' + i + '" >Codigo Barras</label> ' +
-                    '              <input id="InputValue_' + i + '" value="1002020012302221" class=""/><br><br> ' +
+                    '              <input id="InputValue_' + i + '" value="22018011850901834000403" class=""/><br><br> ' +
                     '              <button class="btn card_btn" onclick="showValueInput( \'' + responseObject[i].urlService + '\',\'' + i + '\');">probar servicio</button> ' +
                     '              <textarea   style="padding: 8px;width: 100%;max-width: 100%;" id="result_' + i + '" ></textarea> ' +
                     '              <button class="btn card_btn" onclick="showBESTJSON(' + i + ');">VER ORDENADO</button> ' +
