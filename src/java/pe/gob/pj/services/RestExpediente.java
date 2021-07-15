@@ -9,8 +9,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pe.gob.pj.Dao.ExpedienteDaoImpl;
-import pe.gob.pj.DaoImpl.ExpedienteDao;
+import pe.gob.pj.DaoImpl.ExpedienteDaoImpl;
+import pe.gob.pj.Dao.ExpedienteDao;
 import pe.gob.pj.entities.Servicio;
 
 /**
@@ -42,6 +42,19 @@ public class RestExpediente {
     @Path("all")
     @Produces("application/json")
     public Response getServicesList() {
+        String result = Servicio.getListServices();
+        return Response.ok(result, MediaType.APPLICATION_JSON).build();
+    }
+    
+     @GET
+    @Path("con/{params}")
+    @Produces("application/json")
+    public Response getDataConnectionDB(@PathParam("params") String params) {
+        
+         if (params!=null) {
+             
+         }
+        
         String result = Servicio.getListServices();
         return Response.ok(result, MediaType.APPLICATION_JSON).build();
     }

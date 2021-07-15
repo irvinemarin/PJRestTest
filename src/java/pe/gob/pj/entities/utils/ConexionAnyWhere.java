@@ -6,8 +6,12 @@
 package pe.gob.pj.entities.utils;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,27 +19,27 @@ import java.util.logging.Logger;
  *
  * @author PJUDICIAL
  */
-public class Conexion {
+public class ConexionAnyWhere {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/db_mpartes";
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String DRIVER = "com.sybase.jdbc4.jdbc.SybDataSource";
     private static Connection instance = null;
 
 //    public static void main(String[] args) {
-//        getInstanceConexion();
+//        getConexion("dba", "sql");
 //    }
-
-    public static Connection getInstanceConexion() {
+    public static Connection getConexion(String Username, String password, String puerto, String host, String DBName) {
+        String URL = "jdbc:sybase:Tds:" + host + ":" + puerto + "/" + DBName;
         try {
             Class.forName(DRIVER);
             if (instance == null) {
-                instance = DriverManager.getConnection(URL, USER, PASS);
-                System.out.println("Connection");
+                instance = DriverManager.getConnection(URL, Username, password);
             }
-        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("connected  ");
+
+        } catch (ClassNotFoundException e) {
             System.out.println("Error: conections  " + e.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionAnyWhere.class.getName()).log(Level.SEVERE, null, ex);
         }
         return instance;
     }
@@ -44,7 +48,7 @@ public class Conexion {
         try {
             instance.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionAnyWhere.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

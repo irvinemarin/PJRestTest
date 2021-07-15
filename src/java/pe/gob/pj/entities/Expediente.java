@@ -48,21 +48,18 @@ public class Expediente {
     String f_resolucion_juz;                                //Fecha resolucion en  juzgado origen
     int n_fojas_juz;                                //Fojas de  juzgado origen
     List<Parte> partes;
+    BaseDatos dbInfo;
+
+    public BaseDatos getDbInfo() {
+        return dbInfo;
+    }
+
+    public void setDbInfo(BaseDatos dbInfo) {
+        this.dbInfo = dbInfo;
+    }
 
    
-    
-    
-//    public Expediente(String c_recurso, String c_proceso, String c_especialidad, String c_procedencia,
-//            String f_oficio, String c_num_oficio, int n_fojas, int c_sumilla, String c_materia,
-//            String f_demanda, String f_calificacion, int n_nro_exp_orig, int n_ano_exp_orig,
-//            int n_incidente_orig, String c_distrito_orig, String c_provincia_orig, String c_org_jurisd_orig,
-//            String c_instancia_orig, String c_tipo_resol_orig, String c_fallo_sala, String f_resolucion_orig,
-//            int n_fojas_orig, int n_nro_exp_juz, int n_ano_exp_juz, int n_incidente_juz,
-//            String c_distrito_juz, String c_provincia_juz, String c_org_jurisd_juz, String c_instancia_juz,
-//            String c_tipo_resol_juz, String c_fallo_juz, String f_resolucion_juz, int n_fojas_juz
-//    ) {
-//
-//    }
+   
     public Expediente(String c_codigoBarras,String c_recurso, String c_proceso, String c_especialidad, String c_procedencia, String f_oficio, String c_num_oficio, int n_fojas, String c_sumilla, String c_materia, String f_demanda, String f_calificacion, int n_nro_exp_orig, int n_ano_exp_orig, int n_incidente_orig, String c_distrito_orig, String c_provincia_orig, String c_org_jurisd_orig, String c_instancia_orig, String c_tipo_resol_orig, String c_fallo_sala, String f_resolucion_orig, int n_fojas_orig, int n_nro_exp_juz, int n_ano_exp_juz, int n_incidente_juz, String c_distrito_juz, String c_provincia_juz, String c_org_jurisd_juz, String c_instancia_juz, String c_tipo_resol_juz, String c_fallo_juz, String f_resolucion_juz, int n_fojas_juz) {
         this.c_codigoBarras = c_codigoBarras;
         this.c_recurso = c_recurso;

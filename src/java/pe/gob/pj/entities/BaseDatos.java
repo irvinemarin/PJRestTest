@@ -9,23 +9,7 @@ package pe.gob.pj.entities;
  *
  * @author Irvin
  */
-//1             N_ID_DISTRITO       Primaria	decimal(19,0)			No	Ninguna			Cambiar Cambiar	Eliminar Eliminar	
-//Más Más
-//	2	N_SECUENCIAL        Primaria	decimal(10,0)			No	Ninguna			Cambiar Cambiar	Eliminar Eliminar	
-//Más Más
-//	3	X_USUARIO           varchar(20)	utf8mb4_general_ci		Sí	NULL			Cambiar Cambiar	Eliminar Eliminar	
-//Más Más
-//	4	X_CLAVE             char(20)	utf8mb4_general_ci		Sí	NULL			Cambiar Cambiar	Eliminar Eliminar	
-//Más Más
-//	5	L_IND_TIPO_CONEXION char(2)	utf8mb4_general_ci		Sí	NULL			Cambiar Cambiar	Eliminar Eliminar	
-//Más Más
-//	6	X_NOM_CORTE         varchar(100)	utf8mb4_general_ci		Sí	NULL			Cambiar Cambiar	Eliminar Eliminar	
-//Más Más
-//	7	X_NOM_SERVICIO      varchar(100)	utf8mb4_general_ci		Sí	NULL			Cambiar Cambiar	Eliminar Eliminar	
-//Más Más
-//	8	X_NOM_BASE          varchar(100)	utf8mb4_general_ci		Sí	NULL			Cambiar Cambiar	Eliminar Eliminar	
-//Más Más
-//	9	X_NOM_ODBC
+
 public class BaseDatos {
 
     int N_ID_DISTRITO;
@@ -38,10 +22,30 @@ public class BaseDatos {
     String X_NOM_SERVICIO;
     String X_NOM_BASE;
     String X_NOM_ODBC;
+    String N_PUERTO;
+    String X_HOST;
 
     public BaseDatos() {
     }
 
+    public String getN_PUERTO() {
+        return N_PUERTO;
+    }
+
+    public void setN_PUERTO(String N_PUERTO) {
+        this.N_PUERTO = N_PUERTO;
+    }
+
+    public String getX_HOST() {
+        return X_HOST;
+    }
+
+    public void setX_HOST(String X_HOST) {
+        this.X_HOST = X_HOST;
+    }
+
+    
+    
     public int getN_ID_DISTRITO() {
         return N_ID_DISTRITO;
     }

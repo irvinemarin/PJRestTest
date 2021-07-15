@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pe.gob.pj.Dao;
+package pe.gob.pj.DaoImpl;
 
 import com.google.gson.Gson;
-import pe.gob.pj.DaoImpl.ExpedienteDao;
+import pe.gob.pj.Dao.ExpedienteDao;
 import pe.gob.pj.entities.Expediente;
 import pe.gob.pj.entities.utils.UtilDB;
 
@@ -14,13 +14,13 @@ import pe.gob.pj.entities.utils.UtilDB;
  *
  * @author Irvin
  */
-public class ExpedienteDaoImpl implements ExpedienteDao {
+public class DistritoJudicialDaoImpl implements ExpedienteDao {
 
-    private static ExpedienteDaoImpl ISNTANCE;
+    private static DistritoJudicialDaoImpl ISNTANCE;
 
-    public static ExpedienteDaoImpl getInstance() {
+    public static DistritoJudicialDaoImpl getInstance() {
         if (ISNTANCE == null) {
-            ISNTANCE = new ExpedienteDaoImpl();
+            ISNTANCE = new DistritoJudicialDaoImpl();
         }
         return ISNTANCE;
     }
