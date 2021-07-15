@@ -18,15 +18,11 @@ import java.util.logging.Logger;
 public class ConexionAnyWhere {
 
     //private static final String URL = "jdbc:sybase:Tds:127.0.0.1:2530/SIJ11_001_09_01";
-    private final String DRIVER = "com.sybase.jdbc4.jdbc.SybDataSource";
-    private Connection instance = null;
+    private static Connection instance = null;
 
-    //    public static void main(String[] args) {
-    //        //cerrarConexion();
-    //        getConexion("dba", "sql", "2530", "127.0.0.1", "SIJ11_001_09_01");
-    //    }
-    
-    public Connection getConexion(String Username, String password, String puerto, String host, String DBName) {
+
+    public static Connection getConexion(String Username, String password, String puerto, String host, String DBName) {
+        String DRIVER = "com.sybase.jdbc4.jdbc.SybDataSource";
         String URL = "jdbc:sybase:Tds:" + host + ":" + puerto + "/" + DBName;
         try {
             Class.forName(DRIVER);
@@ -43,7 +39,7 @@ public class ConexionAnyWhere {
         return instance;
     }
 
-    public void cerrarConexion() {
+    public static void cerrarConexion() {
         try {
             instance.close();
         } catch (SQLException ex) {
